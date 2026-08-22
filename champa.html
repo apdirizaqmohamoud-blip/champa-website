@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Champa Sports House — Baidoa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch:#122318;
+    --pitch-2:#1c3626;
+    --turf:#2f6b45;
+    --turf-light:#3f8a5c;
+    --chalk:#faf7ef;
+    --chalk-dim:#e7e0cf;
+    --ink:#12211a;
+    --clay:#c4432b;
+    --gold:#e8b84b;
+    --line: rgba(250,247,239,0.14);
+    --radius: 10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    background:var(--chalk);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    line-height:0.95;
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  img{max-width:100%; display:block;}
+  button{ font-family:inherit; cursor:pointer; border:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  ::selection{ background:var(--gold); color:var(--pitch); }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:sticky; top:0; z-index:60;
+    background:var(--pitch);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; color:var(--chalk); }
+  .brand-badge{
+    width:42px; height:42px; border-radius:50%;
+    background:var(--turf); color:var(--chalk);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton', sans-serif; font-size:18px; border:2px solid var(--gold);
+    flex-shrink:0;
+  }
+  .brand-text{ display:flex; flex-direction:column; line-height:1; }
+  .brand-text .name{ font-family:'Anton', sans-serif; font-size:18px; letter-spacing:0.03em; }
+  .brand-text .place{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--gold); margin-top:4px; letter-spacing:0.08em; }
+  nav.links{ display:flex; align-items:center; gap:28px; }
+  nav.links button.navlink{
+    background:none; color:var(--chalk-dim); font-size:14px; font-weight:600;
+    padding:8px 2px; position:relative; letter-spacing:0.02em;
+  }
+  nav.links button.navlink.active{ color:var(--chalk); }
+  nav.links button.navlink.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-4px; height:3px; background:var(--gold);
+  }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
+  .cart-btn{
+    background:var(--turf); color:var(--chalk); padding:10px 16px; border-radius:999px;
+    display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px;
+    border:1px solid var(--line);
+  }
+  .cart-count{
+    background:var(--gold); color:var(--pitch); border-radius:999px;
+    min-width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-family:'JetBrains Mono', monospace; font-weight:700; padding:0 4px;
+  }
+  .burger{ display:none; background:none; color:var(--chalk); font-size:22px; }
+
+  @media (max-width:860px){
+    nav.links{
+      display:none; position:absolute; top:72px; left:0; right:0; background:var(--pitch);
+      flex-direction:column; align-items:flex-start; gap:0; border-bottom:1px solid var(--line);
+    }
+    nav.links.open{ display:flex; }
+    nav.links button.navlink{ width:100%; padding:16px 24px; border-bottom:1px solid var(--line); }
+    nav.links button.navlink.active::after{ display:none; }
+    nav.links button.navlink.active{ background:var(--pitch-2); }
+    .burger{ display:block; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:
+      radial-gradient(circle at 82% 15%, rgba(232,184,75,0.16), transparent 45%),
+      repeating-linear-gradient(90deg, rgba(250,247,239,0.035) 0 2px, transparent 2px 96px),
+      linear-gradient(180deg, var(--pitch) 0%, var(--pitch-2) 100%);
+    color:var(--chalk);
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--gold);
+    letter-spacing:0.14em; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--clay); display:inline-block; }
+  .hero h1{ font-size:clamp(42px, 6vw, 76px); }
+  .hero h1 .accent{ color:var(--gold); -webkit-text-stroke:0; }
+  .hero p.lede{ font-size:17px; color:var(--chalk-dim); max-width:480px; margin-top:20px; font-weight:500; }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:999px;
+    font-weight:700; font-size:14.5px; letter-spacing:0.01em; transition:transform .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--gold); color:var(--pitch); }
+  .btn-outline{ background:transparent; color:var(--chalk); border:1.5px solid var(--line); }
+
+  .scoreboard{
+    background:var(--ink); border:1px solid var(--line); border-radius:16px; padding:26px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .scoreboard-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .scoreboard-top .tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); letter-spacing:0.1em; }
+  .score-row{ display:flex; justify-content:space-between; align-items:baseline; padding:14px 0; border-bottom:1px dashed var(--line); }
+  .score-row:last-child{ border-bottom:none; }
+  .score-row .label{ color:var(--chalk-dim); font-size:13px; font-weight:600; }
+  .score-row .num{ font-family:'JetBrains Mono', monospace; font-size:22px; color:var(--chalk); font-weight:700; }
+  .score-row .num.gold{ color:var(--gold); }
+
+  /* ticker */
+  .ticker{
+    background:var(--turf); color:var(--chalk); overflow:hidden; white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:inline-flex; gap:0; animation:scroll-left 26s linear infinite;
+    padding:11px 0;
+  }
+  @keyframes scroll-left{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  .ticker-item{ font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:700; letter-spacing:0.05em; padding:0 28px; border-right:1px solid rgba(250,247,239,0.25); }
+
+  /* ===== SECTION HEADERS ===== */
+  .section{ padding:80px 0; }
+  .section.tight{ padding:56px 0; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:38px; flex-wrap:wrap; }
+  .section-head .eyebrow{ color:var(--clay); }
+  .section-head h2{ font-size:clamp(28px, 4vw, 42px); color:var(--ink); }
+  .section-head p{ color:#5b6a60; max-width:420px; font-size:14.5px; }
+
+  /* category chips */
+  .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:34px; }
+  .chip{
+    background:var(--chalk); border:1.5px solid #ddd4bc; color:var(--ink);
+    padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:700;
+  }
+  .chip.active{ background:var(--ink); color:var(--chalk); border-color:var(--ink); }
+
+  /* product grid - ticket/jersey card */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:22px; }
+  .card{
+    background:#fff; border:1.5px solid #eae3cf; border-radius:var(--radius); overflow:hidden;
+    position:relative; transition:transform .18s ease, box-shadow .18s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(18,34,24,0.35); }
+  .card-media{
+    background:linear-gradient(135deg, var(--pitch-2), var(--pitch));
+    aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; font-size:52px;
+    position:relative;
+    color:var(--chalk);
+    overflow:hidden;
+  }
+  .card-media img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .card-media .jersey-no{
+    position:absolute; top:10px; left:12px; font-family:'JetBrains Mono', monospace;
+    color:var(--gold); font-size:11px; font-weight:700; letter-spacing:0.05em;
+  }
+  .card-media .stock-badge{
+    position:absolute; top:10px; right:12px; font-family:'JetBrains Mono', monospace;
+    font-size:10px; font-weight:700; background:rgba(250,247,239,0.14); color:var(--chalk);
+    padding:3px 8px; border-radius:999px;
+  }
+  .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .card-cat{ font-size:11px; color:var(--turf); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+  .card-title{ font-size:15.5px; font-weight:700; color:var(--ink); }
+  .card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:12px; border-top:1px dashed #e3dcc7; }
+  .card-price{ font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--ink); font-size:15px; }
+  .add-btn{
+    background:var(--pitch); color:var(--chalk); width:36px; height:36px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700;
+    flex-shrink:0;
+  }
+  .add-btn:hover{ background:var(--turf); }
+  .empty-note{ color:#8a8171; font-size:14px; padding:30px 0; }
+
+  /* ===== ABOUT ===== */
+  .about-wrap{ background:var(--pitch); color:var(--chalk); }
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+  .about-grid p{ color:var(--chalk-dim); font-size:15.5px; margin-top:14px; }
+  .roster{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px; }
+  .roster-item{ background:var(--pitch-2); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .roster-item .n{ font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:26px; font-weight:700; }
+  .roster-item .t{ font-size:12.5px; color:var(--chalk-dim); margin-top:4px; font-weight:600; }
+  .quote-block{
+    border-left:3px solid var(--gold); padding-left:20px; margin-top:26px; font-size:15px; color:var(--chalk-dim); font-style:normal;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .contact-card{
+    background:#fff; border:1.5px solid #eae3cf; border-radius:var(--radius); padding:26px;
+  }
+  .contact-row{ display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid #f0ead9; }
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row .ic{
+    width:38px; height:38px; border-radius:10px; background:var(--pitch); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;
+  }
+  .contact-row .lbl{ font-size:11.5px; color:#8a8171; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; }
+  .contact-row .val{ font-size:15px; font-weight:600; margin-top:2px; }
+  .map-card{
+    background:var(--pitch); border-radius:var(--radius); color:var(--chalk); padding:26px;
+    display:flex; flex-direction:column; justify-content:center; min-height:220px;
+    background-image:
+      linear-gradient(rgba(18,35,24,0.86), rgba(18,35,24,0.92)),
+      repeating-linear-gradient(0deg, rgba(250,247,239,0.05) 0 1px, transparent 1px 26px),
+      repeating-linear-gradient(90deg, rgba(250,247,239,0.05) 0 1px, transparent 1px 26px);
+  }
+  .map-card .pin{ font-size:30px; }
+  .map-card h3{ margin-top:10px; font-size:22px; }
+  .map-card p{ color:var(--chalk-dim); font-size:13.5px; margin-top:6px; }
+  form.contact-form{ display:flex; flex-direction:column; gap:14px; margin-top:18px; }
+  form.contact-form input, form.contact-form textarea{
+    background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:8px; padding:13px 14px;
+    font-family:inherit; font-size:14px; color:var(--ink); width:100%;
+  }
+  form.contact-form textarea{ min-height:100px; resize:vertical; }
+  form.contact-form label{ font-size:12.5px; font-weight:700; color:#5b6a60; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:-8px; }
+  .form-msg{ font-size:13.5px; font-weight:700; color:var(--turf); display:none; }
+
+  /* ===== FOOTER ===== */
+  footer{ background:var(--ink); color:var(--chalk-dim); padding:44px 0 26px; }
+  .footer-grid{ display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; padding-bottom:26px; border-bottom:1px solid rgba(250,247,239,0.1); }
+  .footer-brand{ color:var(--chalk); font-family:'Anton', sans-serif; font-size:20px; }
+  .footer-cols{ display:flex; gap:56px; flex-wrap:wrap; }
+  .footer-col h4{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); letter-spacing:0.08em; margin-bottom:12px; text-transform:uppercase; }
+  .footer-col div{ font-size:13.5px; padding:4px 0; color:var(--chalk-dim); }
+  .footer-bottom{ padding-top:20px; font-size:12.5px; color:#7d8a80; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  /* ===== CART DRAWER ===== */
+  .overlay{
+    position:fixed; inset:0; background:rgba(18,34,24,0.55); z-index:90; opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(400px, 92vw); background:var(--chalk);
+    z-index:95; transform:translateX(100%); transition:transform .25s ease; display:flex; flex-direction:column;
+    box-shadow:-20px 0 50px rgba(0,0,0,0.25);
+  }
+  .drawer.show{ transform:translateX(0); }
+  .drawer-head{ background:var(--pitch); color:var(--chalk); padding:22px 22px; display:flex; justify-content:space-between; align-items:center; }
+  .drawer-head h3{ font-size:20px; }
+  .drawer-close{ background:none; color:var(--chalk); font-size:22px; }
+  .drawer-body{ flex:1; overflow-y:auto; padding:18px 22px; }
+  .cart-item{ display:flex; gap:12px; padding:14px 0; border-bottom:1px solid #eae3cf; align-items:center; }
+  .cart-item .ic{ width:52px; height:52px; border-radius:8px; background:var(--pitch); display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
+  .cart-item .info{ flex:1; }
+  .cart-item .info .t{ font-size:14px; font-weight:700; }
+  .cart-item .info .p{ font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#5b6a60; margin-top:2px; }
+  .qty-ctrl{ display:flex; align-items:center; gap:8px; }
+  .qty-ctrl button{ width:26px; height:26px; border-radius:50%; background:var(--chalk-dim); font-weight:700; }
+  .qty-ctrl span{ font-family:'JetBrains Mono', monospace; font-weight:700; min-width:16px; text-align:center; }
+  .remove-btn{ font-size:12px; color:var(--clay); font-weight:700; margin-left:8px; }
+  .drawer-foot{ padding:20px 22px; border-top:1.5px solid #eae3cf; background:#fff; }
+  .drawer-total{ display:flex; justify-content:space-between; font-size:16px; font-weight:800; margin-bottom:14px; }
+  .drawer-total .v{ font-family:'JetBrains Mono', monospace; color:var(--turf); }
+  select.pay-select{
+    width:100%; background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:9px; padding:12px 13px;
+    font-family:inherit; font-size:14px; margin-bottom:12px;
+  }
+  .checkout-btn{ width:100%; background:var(--turf); color:#fff; padding:15px; border-radius:10px; font-weight:800; font-size:15px; }
+  .cart-empty{ text-align:center; padding:60px 20px; color:#8a8171; }
+  .cart-empty .e{ font-size:36px; margin-bottom:10px; }
+
+  /* ===== ADMIN ===== */
+  .admin-wrap{ background:#fff; border:1.5px solid #eae3cf; border-radius:var(--radius); padding:30px; }
+  .admin-grid{ display:grid; grid-template-columns:340px 1fr; gap:32px; }
+  @media (max-width:900px){ .admin-grid{ grid-template-columns:1fr; } }
+  .admin-form{ display:flex; flex-direction:column; gap:12px; }
+  .admin-form label{ font-size:12px; font-weight:700; color:#5b6a60; text-transform:uppercase; letter-spacing:0.04em; }
+  .admin-form input, .admin-form select{
+    background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:8px; padding:11px 12px; font-family:inherit; font-size:14px;
+  }
+  .admin-form .field{ display:flex; flex-direction:column; gap:5px; }
+  .image-upload-box{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    background:var(--chalk); border:2px dashed #c9bd9c; border-radius:10px; padding:22px 14px;
+    cursor:pointer; text-align:center; transition:border-color .15s ease, background .15s ease;
+  }
+  .image-upload-box:hover{ border-color:var(--turf); background:#f3efe1; }
+  .image-upload-box .icon{ font-size:26px; }
+  .image-upload-box .txt{ font-size:13px; font-weight:700; color:var(--ink); }
+  .image-upload-box .sub{ font-size:11px; color:#8a8171; }
+  .admin-submit{ background:var(--pitch); color:var(--chalk); padding:13px; border-radius:9px; font-weight:800; margin-top:6px; }
+  table.admin-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  table.admin-table th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:#8a8171; padding:10px 8px; border-bottom:2px solid #eae3cf; }
+  table.admin-table td{ padding:12px 8px; border-bottom:1px solid #f0ead9; vertical-align:middle; }
+  table.admin-table .icell{ display:flex; align-items:center; gap:10px; }
+  table.admin-table .icell .em{ font-size:20px; }
+  table.admin-table .icell .thumb{ width:34px; height:34px; border-radius:7px; object-fit:cover; flex-shrink:0; }
+  .del-btn{ background:#fbe8e4; color:var(--clay); padding:6px 12px; border-radius:7px; font-size:12.5px; font-weight:700; }
+  .admin-note{ font-size:12.5px; color:#8a8171; margin-top:14px; background:var(--chalk); padding:12px 14px; border-radius:8px; border:1px solid #eae3cf; }
+
+  /* dashboard tabs */
+  .dash-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:26px; border-bottom:1.5px solid #eae3cf; }
+  .dash-tab{
+    background:none; padding:12px 6px; font-size:13.5px; font-weight:700; color:#8a8171;
+    white-space:nowrap; position:relative; flex-shrink:0;
+  }
+  .dash-tab.active{ color:var(--ink); }
+  .dash-tab.active::after{ content:""; position:absolute; left:0; right:0; bottom:-5px; height:3px; background:var(--gold); border-radius:2px; }
+  .dash-panel{ display:none; }
+  .dash-panel.active{ display:block; }
+
+  /* stat cards */
+  .stat-cards{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:14px; margin-bottom:30px; }
+  .stat-card{ background:var(--pitch); color:var(--chalk); border-radius:12px; padding:18px; }
+  .stat-card .v{ font-family:'JetBrains Mono', monospace; font-size:26px; font-weight:700; color:var(--gold); }
+  .stat-card .l{ font-size:12px; color:var(--chalk-dim); margin-top:4px; font-weight:600; }
+  .dash-sub-h{ font-size:15px; font-weight:800; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.03em; }
+
+  /* categories */
+  .cat-add-row{ display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .cat-add-row input{ flex:1; min-width:180px; background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:8px; padding:11px 12px; font-family:inherit; font-size:14px; }
+  .cat-add-row button{ background:var(--pitch); color:var(--chalk); padding:11px 20px; border-radius:8px; font-weight:800; font-size:13.5px; }
+  .cat-list{ display:flex; flex-direction:column; gap:8px; }
+  .cat-list-row{ display:flex; align-items:center; justify-content:space-between; background:var(--chalk); border:1px solid #eae3cf; border-radius:9px; padding:12px 16px; }
+  .cat-list-row .name{ font-weight:700; font-size:14px; }
+  .cat-list-row .count{ font-size:12px; color:#8a8171; margin-left:8px; font-weight:600; }
+
+  /* orders */
+  .order-card{ border:1.5px solid #eae3cf; border-radius:10px; padding:16px 18px; margin-bottom:12px; }
+  .order-card-top{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+  .order-id{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13.5px; }
+  .order-date{ font-size:12px; color:#8a8171; }
+  .order-items{ font-size:13px; color:#5b6a60; margin-bottom:10px; line-height:1.7; }
+  .order-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .order-total{ font-family:'JetBrains Mono', monospace; font-weight:800; font-size:15px; }
+  .order-pay{ font-size:12px; background:var(--chalk-dim); padding:4px 10px; border-radius:999px; font-weight:700; }
+  select.order-status{ background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:8px; padding:8px 10px; font-size:12.5px; font-weight:700; font-family:inherit; }
+  .no-orders{ text-align:center; padding:50px 0; color:#8a8171; }
+  .no-orders .e{ font-size:34px; margin-bottom:10px; }
+
+  /* payment methods */
+  .pay-add-row{ display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .pay-add-row input{ flex:1; min-width:180px; background:var(--chalk); border:1.5px solid #ddd4bc; border-radius:8px; padding:11px 12px; font-family:inherit; font-size:14px; }
+  .pay-add-row button{ background:var(--pitch); color:var(--chalk); padding:11px 20px; border-radius:8px; font-weight:800; font-size:13.5px; }
+  .pay-list{ display:flex; flex-direction:column; gap:10px; }
+  .pay-row{ display:flex; align-items:center; justify-content:space-between; background:var(--chalk); border:1px solid #eae3cf; border-radius:9px; padding:14px 16px; }
+  .pay-row .name{ font-weight:700; font-size:14px; display:flex; align-items:center; gap:10px; }
+  .switch{ position:relative; width:42px; height:24px; flex-shrink:0; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .slider{ position:absolute; inset:0; background:#ddd4bc; border-radius:999px; transition:.2s; cursor:pointer; }
+  .switch .slider::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s; }
+  .switch input:checked + .slider{ background:var(--turf); }
+  .switch input:checked + .slider::before{ transform:translateX(18px); }
+
+  .admin-login{ max-width:360px; margin:0 auto; text-align:center; padding:50px 0; }
+  .admin-login .ic{ font-size:38px; }
+  .admin-login input{ width:100%; margin-top:18px; padding:13px 14px; border-radius:9px; border:1.5px solid #ddd4bc; background:var(--chalk); font-family:inherit; font-size:14px; }
+  .admin-login button{ width:100%; margin-top:12px; background:var(--pitch); color:var(--chalk); padding:13px; border-radius:9px; font-weight:800; }
+  .admin-login .hint{ font-size:12px; color:#8a8171; margin-top:12px; }
+  .err{ color:var(--clay); font-size:12.5px; font-weight:700; margin-top:8px; display:none; }
+  .toast{
+    position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); z-index:110;
+    background:var(--pitch); color:var(--chalk); padding:14px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3); opacity:0; pointer-events:none; transition:all .25s ease;
+    display:flex; align-items:center; gap:10px; border:1px solid var(--line);
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .view{ display:none; }
+  .view.active{ display:block; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="brand-badge">CS</div>
+      <div class="brand-text">
+        <span class="name">Champa Sports House</span>
+        <span class="place">BAIDOA · SOOMAALIYA</span>
+      </div>
+    </div>
+    <nav class="links" id="navLinks">
+      <button class="navlink active" data-view="home">Home</button>
+      <button class="navlink" data-view="about">About</button>
+      <button class="navlink" data-view="contact">Contact</button>
+      <button class="navlink" data-view="admin">Admin Panel</button>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartOpenBtn" aria-label="Furo cart-ka">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burgerBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ============ HOME ============ -->
+<main>
+<section class="view active" id="view-home">
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> DUKAAN AGABKA SPORTSKA · BAIDOA</div>
+        <h1>Diyaarso <span class="accent">Ciyaarta</span><br>Sida Xirfadlaha</h1>
+        <p class="lede">Kubadaha, kabaha, jaakadaha iyo agabka tababarka ee tayada sare — dhammaan waxaad ka heli kartaa Champa Sports House, isla dukaanka Baidoa ku yaala.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="scrollToShop()">🛒 Bood Dukaanka</button>
+          <button class="btn btn-outline" onclick="showView('contact')">📍 Halka Aan Ku Yaalno</button>
+        </div>
+      </div>
+      <div class="scoreboard">
+        <div class="scoreboard-top">
+          <span class="tag">CSH · DUKAAN OFFICIAL</span>
+          <span class="tag">BAIDOA</span>
+        </div>
+        <div class="score-row"><span class="label">Alaabta la heli karo</span><span class="num gold" id="statProducts">0</span></div>
+        <div class="score-row"><span class="label">Qaybaha alaabta</span><span class="num" id="statCats">0</span></div>
+        <div class="score-row"><span class="label">Sanadaha waayo-aragnimo</span><span class="num">7+</span></div>
+        <div class="score-row"><span class="label">Gaadhitaanka gudaha magaalada</span><span class="num">24 saac</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">ALAABTA</div>
+          <h2>Waxa Kaydka Ku Jira</h2>
+          <p>Dooro qaybta si aad u aragto agabka la heli karo — dhammaan qiimuhu waa doolar Mareykan.</p>
+        </div>
+      </div>
+      <div class="chips" id="chipRow"></div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="view" id="view-about">
+  <div class="about-wrap section">
+    <div class="wrap about-grid">
+      <div>
+        <div class="eyebrow">TAARIIKHDEENA</div>
+        <h2>Champa Sports House</h2>
+        <p>Champa Sports House waa dukaan ku yaala bartamaha magaalada Baidoa, oo la aasaasay si loo siiyo ciyaartoyda, tababarayaasha iyo qoysaska Baidoa agab sports ah oo tayo leh, qiimo macquul ah, iyo adeeg deggan.</p>
+        <p>Waxaan la shaqeynaa macmiisha si aan u helno kubadaha, kabaha, jaakadaha, iyo qalabka tababarka ee ugu haboon buundo kasta — ha ahaato kubadda cagta, kubadda koleyga, ama tababar guud.</p>
+        <div class="quote-block">"Ciyaar walba waxay u baahan tahay qalab sax ah — taasi waa sababta aan u jirno."</div>
+      </div>
+      <div>
+        <div class="roster">
+          <div class="roster-item"><div class="n" id="aboutStatProducts">0</div><div class="t">Alaab la heli karo</div></div>
+          <div class="roster-item"><div class="n">120+</div><div class="t">Macmiil sanadle ah</div></div>
+          <div class="roster-item"><div class="n">7</div><div class="t">Sano oo adeeg ah</div></div>
+          <div class="roster-item"><div class="n">100%</div><div class="t">Alaab asal ah</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="view" id="view-contact">
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">NALA SOO XIRIIR</div>
+          <h2>Kaalay Dukaanka Ama Nala Soo Xiriir</h2>
+          <p>Waan kaa jawaabi doonaa maalinta oo dhan — Sabti ilaa Khamiis.</p>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-row">
+            <div class="ic">📍</div>
+            <div><div class="lbl">Goobta</div><div class="val">Agagaarka Buundada, Xaafadda Onondka, Baidoa, Soomaaliya</div></div>
+          </div>
+          <div class="contact-row">
+            <div class="ic">📞</div>
+            <div><div class="lbl">Telefoon / WhatsApp</div><div class="val">+252 61 234 5678</div></div>
+          </div>
+          <div class="contact-row">
+            <div class="ic">✉️</div>
+            <div><div class="lbl">Iimayl</div><div class="val">info@champasportshouse.so</div></div>
+          </div>
+          <div class="contact-row">
+            <div class="ic">🕒</div>
+            <div><div class="lbl">Saacadaha Shaqada</div><div class="val">Sabti–Khamiis · 8:00am – 7:00pm</div></div>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <label for="cname">Magaca</label>
+            <input id="cname" type="text" placeholder="Magacaaga" required>
+            <label for="cmsg">Fariinta</label>
+            <textarea id="cmsg" placeholder="Qor su'aashaada ama codsigaaga..." required></textarea>
+            <button type="submit" class="btn btn-primary" style="align-self:flex-start; background:var(--turf); color:#fff;">Dir Fariinta</button>
+            <span class="form-msg" id="formMsg">✅ Fariintaada waa la diray, waan kula soo xiriiri doonaa dhawaan!</span>
+          </form>
+        </div>
+        <div class="map-card">
+          <span class="pin">📍</span>
+          <h3>Baidoa, Bay Region</h3>
+          <p>Champa Sports House waxay ku taal agagaarka Buundada, Xaafadda Onondka ee Baidoa — si fudud ayaad noogu heli kartaa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ ADMIN ============ -->
+<section class="view" id="view-admin">
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">MAAMULKA DUKAANKA</div>
+          <h2>Admin Panel</h2>
+        </div>
+      </div>
+
+      <div id="adminLoginBox" class="admin-wrap">
+        <div class="admin-login">
+          <div class="ic">🔒</div>
+          <h3 style="margin-top:10px;">Gal Sida Admin</h3>
+          <p style="color:#8a8171; font-size:13.5px; margin-top:6px;">Geli password-ka maamulka si aad u maareyso alaabta.</p>
+          <input type="password" id="adminPass" placeholder="Password">
+          <button onclick="tryAdminLogin()">Gal</button>
+          <div class="err" id="adminErr">Password-ku waa khalad, isku day mar kale.</div>
+          <div class="hint">Demo password: <b>champa123</b></div>
+        </div>
+      </div>
+
+      <div id="adminPanelBox" class="admin-wrap" style="display:none;">
+
+        <div class="dash-tabs" id="dashTabs">
+          <button class="dash-tab active" data-tab="dashboard">📊 Dashboard</button>
+          <button class="dash-tab" data-tab="categories">🏷️ Categories</button>
+          <button class="dash-tab" data-tab="orders">📦 Orders</button>
+          <button class="dash-tab" data-tab="addproduct">➕ Add Product</button>
+          <button class="dash-tab" data-tab="payment">💳 Payment Method</button>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="dash-panel active" id="tab-dashboard">
+          <div class="stat-cards">
+            <div class="stat-card"><div class="v" id="dStatProducts">0</div><div class="l">Alaab guud</div></div>
+            <div class="stat-card"><div class="v" id="dStatCats">0</div><div class="l">Qaybaha</div></div>
+            <div class="stat-card"><div class="v" id="dStatOrders">0</div><div class="l">Dalabyada</div></div>
+            <div class="stat-card"><div class="v" id="dStatRevenue">$0</div><div class="l">Dakhliga guud</div></div>
+          </div>
+          <div class="dash-sub-h">Dalabyadii Ugu Dambeeyay</div>
+          <div id="recentOrders"></div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="dash-panel" id="tab-categories">
+          <div class="dash-sub-h">Ku Dar Qayb Cusub</div>
+          <div class="cat-add-row">
+            <input id="newCatName" type="text" placeholder="Tusaale: Aaladaha Booliska">
+            <button onclick="addCategory()">+ Ku Dar</button>
+          </div>
+          <div class="err" id="catErr">Qaybtan horay ayay u jirtay, ama magac ma qorin.</div>
+          <div class="dash-sub-h" style="margin-top:22px;">Qaybaha Hadda Jira</div>
+          <div class="cat-list" id="catList"></div>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="dash-panel" id="tab-orders">
+          <div class="dash-sub-h">Dalabyada Macaamiisha (<span id="orderCount">0</span>)</div>
+          <div id="ordersList"></div>
+        </div>
+
+        <!-- ADD PRODUCT -->
+        <div class="dash-panel" id="tab-addproduct">
+          <div class="admin-grid">
+            <div>
+              <h3 style="font-size:16px; margin-bottom:14px;">Ku Dar Alaab Cusub</h3>
+              <div class="admin-form">
+                <div class="field"><label>Magaca Alaabta</label><input id="pName" type="text" placeholder="Tusaale: Kubad Cagta"></div>
+                <div class="field"><label>Qiimaha ($)</label><input id="pPrice" type="number" min="0" placeholder="25"></div>
+                <div class="field"><label>Qaybta</label>
+                  <select id="pCat"></select>
+                </div>
+                <div class="field"><label>Sumadda (Emoji)</label><input id="pIcon" type="text" placeholder="⚽" maxlength="4"></div>
+                <div class="field">
+                  <label>Sawirka Alaabta (ikhtiyaari)</label>
+                  <label class="image-upload-box" for="pImage" id="uploadBox">
+                    <span class="icon">📷</span>
+                    <span class="txt">Riix si aad sawir u soo raarto</span>
+                    <span class="sub">JPG ama PNG</span>
+                  </label>
+                  <input id="pImage" type="file" accept="image/*" style="display:none;">
+                  <div id="pImagePreviewBox" style="display:none; margin-top:8px;">
+                    <img id="pImagePreview" style="width:100%; max-width:180px; aspect-ratio:4/3; object-fit:cover; border-radius:8px; border:1.5px solid #ddd4bc;">
+                    <button type="button" onclick="clearImagePreview()" style="background:none; color:var(--clay); font-size:12px; font-weight:700; margin-top:6px;">✕ Ka saar sawirka</button>
+                  </div>
+                </div>
+                <div class="field"><label>Xaddiga Kaydka</label><input id="pStock" type="number" min="0" placeholder="10"></div>
+                <button class="admin-submit" onclick="addProduct()">+ Ku Dar Alaabta</button>
+                <div class="err" id="pErr">Fadlan buuxi dhammaan meelaha loo baahan yahay.</div>
+              </div>
+              <div class="admin-note">📌 Haddii aad sawir soo raristo, wuxuu bedelayaa summadda emoji-ga bogga hore. Alaabtan waa la keydiyaa si joogto ah — dhammaan dadka bogga furta way arki doonaan.</div>
+            </div>
+            <div>
+              <h3 style="font-size:16px; margin-bottom:14px;">Liiska Alaabta (<span id="adminCount">0</span>)</h3>
+              <div style="overflow-x:auto;">
+                <table class="admin-table">
+                  <thead><tr><th>Alaabta</th><th>Qaybta</th><th>Qiimaha</th><th>Kaydka</th><th></th></tr></thead>
+                  <tbody id="adminTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div class="dash-panel" id="tab-payment">
+          <div class="dash-sub-h">Ku Dar Hab Lacag-bixin Cusub</div>
+          <div class="pay-add-row">
+            <input id="newPayName" type="text" placeholder="Tusaale: Sahal Service">
+            <button onclick="addPaymentMethod()">+ Ku Dar</button>
+          </div>
+          <div class="err" id="payErr">Fadlan geli magac, ama habkan horay ayuu u jiray.</div>
+          <div class="dash-sub-h" style="margin-top:22px;">Hababka Lacag-bixinta</div>
+          <p style="font-size:12.5px; color:#8a8171; margin-bottom:14px;">Furitaanka/xiritaanka habka wuxuu go'aaminayaa waxa macmiilku ku arki karo marka uu iibsanayo.</p>
+          <div class="pay-list" id="payList"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">Champa Sports House</div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Bogagga</h4>
+          <div><button class="navlink" onclick="showView('home')" style="background:none;color:inherit;">Home</button></div>
+          <div><button class="navlink" onclick="showView('about')" style="background:none;color:inherit;">About</button></div>
+          <div><button class="navlink" onclick="showView('contact')" style="background:none;color:inherit;">Contact</button></div>
+        </div>
+        <div class="footer-col">
+          <h4>Xiriirka</h4>
+          <div>+252 61 234 5678</div>
+          <div>info@champasportshouse.so</div>
+          <div>Agagaarka Buundada, Baidoa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Champa Sports House — Baidoa, Soomaaliya</span>
+      <span>Made with ⚽ in Baidoa</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>🛒 Cart-kaaga</h3>
+    <button class="drawer-close" id="drawerCloseBtn">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none;">
+    <select class="pay-select" id="paySelect"></select>
+    <div class="drawer-total"><span>Wadarta Guud</span><span class="v" id="cartTotal">$0</span></div>
+    <button class="checkout-btn" onclick="checkout()">Xaqiiji Iibsiga</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ---------- DATA ---------- */
+  const DEFAULT_PRODUCTS = [
+    {id:1, name:"Kubad Cagta - Pro Match", price:28, cat:"Kubadaha", icon:"⚽", stock:14},
+    {id:2, name:"Kubad Koleyga", price:24, cat:"Kubadaha", icon:"🏀", stock:9},
+    {id:3, name:"Kabo Ciyaareed - Speed X", price:45, cat:"Kabaha", icon:"👟", stock:6},
+    {id:4, name:"Kabo Tartan - Turf Grip", price:52, cat:"Kabaha", icon:"👟", stock:4},
+    {id:5, name:"Jaakad Kooxeed - Home Kit", price:33, cat:"Jaakadaha", icon:"👕", stock:20},
+    {id:6, name:"Jaakad Tababar - Windbreaker", price:38, cat:"Jaakadaha", icon:"🧥", stock:11},
+    {id:7, name:"Xadhig Boodbood", price:9, cat:"Tababarka", icon:"🪢", stock:30},
+    {id:8, name:"Kabo Gacmeed - Goalkeeper", price:19, cat:"Tababarka", icon:"🧤", stock:15},
+    {id:9, name:"Buste Cagta - Shin Guard", price:12, cat:"Tababarka", icon:"🦵", stock:22},
+    {id:10, name:"Shandad Sports", price:26, cat:"Tababarka", icon:"🎒", stock:8},
+  ];
+  let products = [];
+  let cart = []; // {id, qty}
+  let categories = [];
+  let orders = [];
+  let paymentMethods = [];
+  let activeCat = "Dhammaan";
+  let isAdmin = false;
+  let storageReady = false;
+
+  const fmt = n => "$" + n.toFixed(0);
+
+  /* ---------- PERSISTENT STORAGE ---------- */
+  // Alaabta, qaybaha, dalabyada & hababka lacag-bixinta waa "shared" — waa xogta dukaanka,
+  // dhammaan qofka furta bogga isku xog bay arkayaan.
+  // Cart-ka qofka waa gaar u ah isaga oo kaliya ("personal").
+  async function loadProducts(){
+    try{
+      const res = await window.storage.get('products', true);
+      products = res && res.value ? JSON.parse(res.value) : [...DEFAULT_PRODUCTS];
+      if(!res){ await saveProducts(); }
+    }catch(e){
+      products = [...DEFAULT_PRODUCTS];
+      try{ await saveProducts(); }catch(e2){ console.error('Save default products failed', e2); }
+    }
+  }
+  async function saveProducts(){
+    try{
+      await window.storage.set('products', JSON.stringify(products), true);
+    }catch(e){
+      console.error('Storage error (products):', e);
+      showToast("⚠️ Kaydinta alaabta way fashilantay, isku day mar kale");
+    }
+  }
+  async function loadCart(){
+    try{
+      const res = await window.storage.get('cart', false);
+      cart = res && res.value ? JSON.parse(res.value) : [];
+    }catch(e){
+      cart = [];
+    }
+  }
+  async function saveCart(){
+    try{
+      await window.storage.set('cart', JSON.stringify(cart), false);
+    }catch(e){
+      console.error('Storage error (cart):', e);
+    }
+  }
+  async function loadCategories(){
+    try{
+      const res = await window.storage.get('categories', true);
+      categories = res && res.value ? JSON.parse(res.value) : ["Kubadaha","Kabaha","Jaakadaha","Tababarka"];
+      if(!res){ await saveCategories(); }
+    }catch(e){
+      categories = ["Kubadaha","Kabaha","Jaakadaha","Tababarka"];
+      try{ await saveCategories(); }catch(e2){}
+    }
+  }
+  async function saveCategories(){
+    try{ await window.storage.set('categories', JSON.stringify(categories), true); }
+    catch(e){ console.error('Storage error (categories):', e); showToast("⚠️ Kaydinta qaybaha way fashilantay"); }
+  }
+  async function loadOrders(){
+    try{
+      const res = await window.storage.get('orders', true);
+      orders = res && res.value ? JSON.parse(res.value) : [];
+      if(!res){ await saveOrders(); }
+    }catch(e){
+      orders = [];
+    }
+  }
+  async function saveOrders(){
+    try{ await window.storage.set('orders', JSON.stringify(orders), true); }
+    catch(e){ console.error('Storage error (orders):', e); showToast("⚠️ Kaydinta dalabka way fashilantay"); }
+  }
+  async function loadPaymentMethods(){
+    try{
+      const res = await window.storage.get('paymentMethods', true);
+      paymentMethods = res && res.value ? JSON.parse(res.value) : [
+        {id:1, name:"EVC Plus", enabled:true},
+        {id:2, name:"Zaad Service", enabled:true},
+        {id:3, name:"Lacag Gacanta (Cash)", enabled:true},
+      ];
+      if(!res){ await savePaymentMethods(); }
+    }catch(e){
+      paymentMethods = [
+        {id:1, name:"EVC Plus", enabled:true},
+        {id:2, name:"Zaad Service", enabled:true},
+        {id:3, name:"Lacag Gacanta (Cash)", enabled:true},
+      ];
+      try{ await savePaymentMethods(); }catch(e2){}
+    }
+  }
+  async function savePaymentMethods(){
+    try{ await window.storage.set('paymentMethods', JSON.stringify(paymentMethods), true); }
+    catch(e){ console.error('Storage error (payment methods):', e); showToast("⚠️ Kaydinta habka lacag-bixinta way fashilantay"); }
+  }
+
+  /* ---------- NAV / VIEWS ---------- */
+  function showView(name){
+    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+    document.getElementById("view-" + name).classList.add("active");
+    document.querySelectorAll(".navlink").forEach(b => b.classList.toggle("active", b.dataset.view === name));
+    document.getElementById("navLinks").classList.remove("open");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  document.querySelectorAll(".navlink[data-view]").forEach(b=>{
+    b.addEventListener("click", ()=> showView(b.dataset.view));
+  });
+  document.getElementById("burgerBtn").addEventListener("click", ()=>{
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+  function scrollToShop(){
+    showView("home");
+    setTimeout(()=> document.getElementById("productGrid").scrollIntoView({behavior:"smooth", block:"start"}), 60);
+  }
+
+  /* ---------- TICKER ---------- */
+  function renderTicker(){
+    const items = products.map(p => `${p.icon} ${p.name.toUpperCase()} — ${fmt(p.price)}`);
+    const doubled = [...items, ...items];
+    document.getElementById("tickerTrack").innerHTML = doubled.map(t => `<span class="ticker-item">${t}</span>`).join("");
+  }
+
+  /* ---------- PRODUCTS ---------- */
+  function renderChips(){
+    const cats = ["Dhammaan", ...categories];
+    document.getElementById("chipRow").innerHTML = cats.map(c =>
+      `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+    ).join("");
+    document.querySelectorAll(".chip").forEach(ch=>{
+      ch.addEventListener("click", ()=>{ activeCat = ch.dataset.cat; renderChips(); renderProducts(); });
+    });
+  }
+
+  function renderProducts(){
+    const list = activeCat === "Dhammaan" ? products : products.filter(p=>p.cat===activeCat);
+    const grid = document.getElementById("productGrid");
+    if(list.length === 0){
+      grid.innerHTML = `<div class="empty-note">Ma jiro alaab qaybtan ku jirta hadda.</div>`;
+      return;
+    }
+    grid.innerHTML = list.map(p => `
+      <div class="card">
+        <div class="card-media">
+          <span class="jersey-no">NO. ${String(p.id).padStart(2,'0')}</span>
+          <span class="stock-badge">${p.stock} kaydsan</span>
+          ${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.icon}
+        </div>
+        <div class="card-body">
+          <div class="card-cat">${p.cat}</div>
+          <div class="card-title">${p.name}</div>
+          <div class="card-foot">
+            <span class="card-price">${fmt(p.price)}</span>
+            <button class="add-btn" aria-label="Ku dar cart-ka" onclick="addToCart(${p.id})">+</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+    document.getElementById("statProducts").textContent = products.length;
+    document.getElementById("statCats").textContent = new Set(products.map(p=>p.cat)).size;
+    document.getElementById("aboutStatProducts").textContent = products.length;
+  }
+
+  /* ---------- CART ---------- */
+  function addToCart(id){
+    const existing = cart.find(c=>c.id===id);
+    if(existing) existing.qty++;
+    else cart.push({id, qty:1});
+    updateCartUI();
+    saveCart();
+    showToast("✅ Waa lagu daray cart-ka");
+    openDrawer();
+  }
+  function changeQty(id, delta){
+    const item = cart.find(c=>c.id===id);
+    if(!item) return;
+    item.qty += delta;
+    if(item.qty <= 0) cart = cart.filter(c=>c.id!==id);
+    updateCartUI();
+    saveCart();
+  }
+  function removeFromCart(id){
+    cart = cart.filter(c=>c.id!==id);
+    updateCartUI();
+    saveCart();
+  }
+  function updateCartUI(){
+    const count = cart.reduce((s,c)=>s+c.qty, 0);
+    document.getElementById("cartCount").textContent = count;
+    const body = document.getElementById("drawerBody");
+    const foot = document.getElementById("drawerFoot");
+    if(cart.length === 0){
+      body.innerHTML = `<div class="cart-empty"><div class="e">🛒</div>Cart-kaagu waa madhan.<br>Bilaaw inaad wax soo dhigto!</div>`;
+      foot.style.display = "none";
+      return;
+    }
+    let total = 0;
+    body.innerHTML = cart.map(c=>{
+      const p = products.find(pp=>pp.id===c.id);
+      if(!p) return "";
+      total += p.price * c.qty;
+      return `
+        <div class="cart-item">
+          <div class="ic">${p.icon}</div>
+          <div class="info">
+            <div class="t">${p.name}</div>
+            <div class="p">${fmt(p.price)} × ${c.qty}</div>
+          </div>
+          <div class="qty-ctrl">
+            <button onclick="changeQty(${p.id}, -1)">−</button>
+            <span>${c.qty}</span>
+            <button onclick="changeQty(${p.id}, 1)">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${p.id})">Tirtir</button>
+        </div>
+      `;
+    }).join("");
+    document.getElementById("cartTotal").textContent = fmt(total);
+    foot.style.display = "block";
+    renderPaySelect();
+  }
+  function renderPaySelect(){
+    const sel = document.getElementById("paySelect");
+    const enabled = paymentMethods.filter(m=>m.enabled);
+    if(enabled.length === 0){
+      sel.innerHTML = `<option value="">Ma jiro hab lacag-bixin oo furan</option>`;
+      return;
+    }
+    sel.innerHTML = `<option value="">Xulo Habka Lacag-bixinta</option>` +
+      enabled.map(m => `<option value="${m.name}">${m.name}</option>`).join("");
+  }
+  function checkout(){
+    if(cart.length === 0) return;
+    const paySel = document.getElementById("paySelect");
+    const payMethod = paySel.value;
+    if(!payMethod){
+      showToast("⚠️ Fadlan xulo habka lacag-bixinta");
+      return;
+    }
+    let total = 0;
+    const items = cart.map(c=>{
+      const p = products.find(pp=>pp.id===c.id);
+      total += p.price * c.qty;
+      return {id:p.id, name:p.name, qty:c.qty, price:p.price};
+    });
+    const order = {
+      id: orders.length ? Math.max(...orders.map(o=>o.id)) + 1 : 1001,
+      date: new Date().toISOString(),
+      items,
+      total,
+      paymentMethod: payMethod,
+      status: "Sugaya"
+    };
+    orders.unshift(order);
+    saveOrders();
+    showToast("🎉 Mahadsanid! Dalabkaaga waa la xaqiijiyay.");
+    cart = [];
+    updateCartUI();
+    saveCart();
+    closeDrawer();
+    if(isAdmin){ renderDashboardStats(); renderOrders(); }
+  }
+  function openDrawer(){
+    document.getElementById("cartDrawer").classList.add("show");
+    document.getElementById("overlay").classList.add("show");
+  }
+  function closeDrawer(){
+    document.getElementById("cartDrawer").classList.remove("show");
+    document.getElementById("overlay").classList.remove("show");
+  }
+  document.getElementById("cartOpenBtn").addEventListener("click", openDrawer);
+  document.getElementById("drawerCloseBtn").addEventListener("click", closeDrawer);
+  document.getElementById("overlay").addEventListener("click", closeDrawer);
+  document.getElementById("pImage").addEventListener("change", handleImageSelect);
+
+  /* ---------- CONTACT FORM ---------- */
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("formMsg").style.display = "block";
+    this.reset();
+    setTimeout(()=> document.getElementById("formMsg").style.display = "none", 4000);
+  });
+
+  /* ---------- TOAST ---------- */
+  let toastTimer;
+  function showToast(msg){
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> t.classList.remove("show"), 2600);
+  }
+
+  /* ---------- ADMIN ---------- */
+  function tryAdminLogin(){
+    const pass = document.getElementById("adminPass").value;
+    if(pass === "champa123"){
+      isAdmin = true;
+      document.getElementById("adminLoginBox").style.display = "none";
+      document.getElementById("adminPanelBox").style.display = "block";
+      renderDashboardStats();
+      renderCategoryOptions();
+      renderCategoryList();
+      renderAdminTable();
+      renderOrders();
+      renderPaymentList();
+    } else {
+      document.getElementById("adminErr").style.display = "block";
+    }
+  }
+
+  /* dashboard tabs */
+  document.getElementById("dashTabs").addEventListener("click", (e)=>{
+    const btn = e.target.closest(".dash-tab");
+    if(!btn) return;
+    document.querySelectorAll(".dash-tab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".dash-panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  });
+
+  /* ---- Dashboard overview ---- */
+  function renderDashboardStats(){
+    document.getElementById("dStatProducts").textContent = products.length;
+    document.getElementById("dStatCats").textContent = categories.length;
+    document.getElementById("dStatOrders").textContent = orders.length;
+    const revenue = orders.reduce((s,o)=>s+o.total, 0);
+    document.getElementById("dStatRevenue").textContent = fmt(revenue);
+    const recent = orders.slice(0, 3);
+    const box = document.getElementById("recentOrders");
+    if(recent.length === 0){
+      box.innerHTML = `<div class="no-orders"><div class="e">📦</div>Wali dalab lama helin.</div>`;
+      return;
+    }
+    box.innerHTML = recent.map(o => orderCardHTML(o, false)).join("");
+  }
+
+  /* ---- Categories ---- */
+  function renderCategoryOptions(){
+    const sel = document.getElementById("pCat");
+    if(!sel) return;
+    sel.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join("");
+  }
+  function renderCategoryList(){
+    document.getElementById("catList").innerHTML = categories.map(c => {
+      const count = products.filter(p=>p.cat===c).length;
+      return `
+        <div class="cat-list-row">
+          <div><span class="name">${c}</span><span class="count">${count} alaab</span></div>
+          <button class="del-btn" onclick="deleteCategory('${c.replace(/'/g,"\\'")}')">Tirtir</button>
+        </div>
+      `;
+    }).join("");
+  }
+  function addCategory(){
+    const input = document.getElementById("newCatName");
+    const name = input.value.trim();
+    const err = document.getElementById("catErr");
+    if(!name || categories.some(c => c.toLowerCase() === name.toLowerCase())){
+      err.style.display = "block";
+      return;
+    }
+    err.style.display = "none";
+    categories.push(name);
+    input.value = "";
+    saveCategories();
+    renderCategoryOptions(); renderCategoryList(); renderChips(); renderDashboardStats();
+    showToast("✅ Qaybta cusub waa la daray");
+  }
+  function deleteCategory(name){
+    const used = products.some(p=>p.cat===name);
+    if(used){
+      showToast("⚠️ Qaybtan alaab bay hayaan, marka hore alaabta ka wareeji ama tirtir");
+      return;
+    }
+    categories = categories.filter(c=>c!==name);
+    if(activeCat === name) activeCat = "Dhammaan";
+    saveCategories();
+    renderCategoryOptions(); renderCategoryList(); renderChips(); renderProducts(); renderDashboardStats();
+    showToast("🗑️ Qaybta waa la tirtiray");
+  }
+
+  /* ---- Add Product ---- */
+  /* ---- Product image upload (resized to a small base64 data URL) ---- */
+  let pendingImageData = null;
+  function handleImageSelect(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 500;
+        const scale = Math.min(1, maxW / img.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        pendingImageData = canvas.toDataURL("image/jpeg", 0.72);
+        document.getElementById("pImagePreview").src = pendingImageData;
+        document.getElementById("pImagePreviewBox").style.display = "block";
+        document.getElementById("uploadBox").style.display = "none";
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  function clearImagePreview(){
+    pendingImageData = null;
+    document.getElementById("pImage").value = "";
+    document.getElementById("pImagePreviewBox").style.display = "none";
+    document.getElementById("uploadBox").style.display = "flex";
+  }
+  function addProduct(){
+    const name = document.getElementById("pName").value.trim();
+    const price = parseFloat(document.getElementById("pPrice").value);
+    const cat = document.getElementById("pCat").value;
+    const icon = document.getElementById("pIcon").value.trim() || "🏷️";
+    const stock = parseInt(document.getElementById("pStock").value);
+    if(!name || isNaN(price) || price < 0 || isNaN(stock) || stock < 0){
+      document.getElementById("pErr").style.display = "block";
+      return;
+    }
+    document.getElementById("pErr").style.display = "none";
+    const nextId = products.length ? Math.max(...products.map(p=>p.id)) + 1 : 1;
+    products.push({id: nextId, name, price, cat, icon, stock, image: pendingImageData});
+    ["pName","pPrice","pIcon","pStock"].forEach(id => document.getElementById(id).value = "");
+    clearImagePreview();
+    renderChips(); renderProducts(); renderTicker(); renderAdminTable(); renderCategoryList(); renderDashboardStats();
+    saveProducts();
+    showToast("✅ Alaabta waa lagu daray dukaanka, waana la keydiyay");
+  }
+  function deleteProduct(id){
+    products = products.filter(p=>p.id!==id);
+    cart = cart.filter(c=>c.id!==id);
+    renderChips(); renderProducts(); renderTicker(); updateCartUI(); renderAdminTable(); renderCategoryList(); renderDashboardStats();
+    saveProducts(); saveCart();
+    showToast("🗑️ Alaabta waa la tirtiray");
+  }
+  function renderAdminTable(){
+    document.getElementById("adminCount").textContent = products.length;
+    document.getElementById("adminTableBody").innerHTML = products.map(p => `
+      <tr>
+        <td><div class="icell">${p.image ? `<img class="thumb" src="${p.image}" alt="">` : `<span class="em">${p.icon}</span>`} ${p.name}</div></td>
+        <td>${p.cat}</td>
+        <td class="mono">${fmt(p.price)}</td>
+        <td>${p.stock}</td>
+        <td><button class="del-btn" onclick="deleteProduct(${p.id})">Tirtir</button></td>
+      </tr>
+    `).join("");
+  }
+
+  /* ---- Orders ---- */
+  function orderCardHTML(o, showStatusSelect){
+    const dt = new Date(o.date);
+    const dateStr = dt.toLocaleDateString('so-SO', {day:'2-digit', month:'short', year:'numeric'}) + " · " + dt.toLocaleTimeString('so-SO', {hour:'2-digit', minute:'2-digit'});
+    const itemsStr = o.items.map(i => `${i.qty}× ${i.name}`).join(" · ");
+    const statusHtml = showStatusSelect
+      ? `<select class="order-status" onchange="updateOrderStatus(${o.id}, this.value)">
+           ${["Sugaya","La Diray","Dhammaystiran","La Joojiyay"].map(s=>`<option value="${s}" ${s===o.status?'selected':''}>${s}</option>`).join("")}
+         </select>`
+      : `<span class="order-pay">${o.status}</span>`;
+    return `
+      <div class="order-card">
+        <div class="order-card-top">
+          <span class="order-id">DALAB #${o.id}</span>
+          <span class="order-date">${dateStr}</span>
+        </div>
+        <div class="order-items">${itemsStr}</div>
+        <div class="order-bottom">
+          <span class="order-total">${fmt(o.total)}</span>
+          <span class="order-pay">💳 ${o.paymentMethod}</span>
+          ${statusHtml}
+        </div>
+      </div>
+    `;
+  }
+  function renderOrders(){
+    document.getElementById("orderCount").textContent = orders.length;
+    const box = document.getElementById("ordersList");
+    if(orders.length === 0){
+      box.innerHTML = `<div class="no-orders"><div class="e">📦</div>Wali dalab lama helin.<br>Marka macmiil uu iibsado, halkan ayuu ka muuqan doonaa.</div>`;
+      return;
+    }
+    box.innerHTML = orders.map(o => orderCardHTML(o, true)).join("");
+  }
+  function updateOrderStatus(id, status){
+    const o = orders.find(o=>o.id===id);
+    if(!o) return;
+    o.status = status;
+    saveOrders();
+    renderDashboardStats();
+    showToast("✅ Xaaladda dalabka waa la cusboonaysiiyay");
+  }
+
+  /* ---- Payment methods ---- */
+  function renderPaymentList(){
+    document.getElementById("payList").innerHTML = paymentMethods.map(m => `
+      <div class="pay-row">
+        <span class="name">💳 ${m.name}</span>
+        <label class="switch">
+          <input type="checkbox" ${m.enabled?'checked':''} onchange="togglePaymentMethod(${m.id}, this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    `).join("");
+  }
+  function addPaymentMethod(){
+    const input = document.getElementById("newPayName");
+    const name = input.value.trim();
+    const err = document.getElementById("payErr");
+    if(!name || paymentMethods.some(m=>m.name.toLowerCase()===name.toLowerCase())){
+      err.style.display = "block";
+      return;
+    }
+    err.style.display = "none";
+    const nextId = paymentMethods.length ? Math.max(...paymentMethods.map(m=>m.id)) + 1 : 1;
+    paymentMethods.push({id: nextId, name, enabled:true});
+    input.value = "";
+    savePaymentMethods();
+    renderPaymentList();
+    showToast("✅ Habka lacag-bixinta waa la daray");
+  }
+  function togglePaymentMethod(id, enabled){
+    const m = paymentMethods.find(m=>m.id===id);
+    if(!m) return;
+    m.enabled = enabled;
+    savePaymentMethods();
+    showToast(enabled ? "✅ Habka waa la furay" : "🔒 Habka waa la xiray");
+  }
+
+  /* ---------- INIT ---------- */
+  async function init(){
+    document.getElementById("productGrid").innerHTML = `<div class="empty-note">⏳ Waa la soo raraya alaabta...</div>`;
+    await Promise.all([loadProducts(), loadCart(), loadCategories(), loadOrders(), loadPaymentMethods()]);
+    storageReady = true;
+    renderTicker();
+    renderChips();
+    renderProducts();
+    updateCartUI();
+    renderCategoryOptions();
+  }
+  init();
+</script>
+
+</body>
+</html>
